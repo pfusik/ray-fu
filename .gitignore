@@ -1,5 +1,7 @@
 *.exe
+*.class
 *.pgm
 RayTracer.cpp
 RayTracer.hpp
 RayTracer.cs
+*.java

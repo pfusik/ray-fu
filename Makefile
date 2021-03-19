@@ -1,5 +1,8 @@
 CXXFLAGS = -std=c++2a -O2 -Wall
 
+java.pgm: RayTracer.class Main.class
+	time java Main
+
 cpp.pgm: cpp.exe
 	time ./cpp.exe
 
@@ -12,5 +15,8 @@ cpp.exe: RayTracer.cpp Main.cpp
 cs.exe: RayTracer.cs Main.cs
 	"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe" -nologo -out:$@ $^
 
-RayTracer.cpp RayTracer.cs: RayTracer.ci
+%.class: %.java
+	javac $<
+
+RayTracer.cpp RayTracer.cs RayTracer.java: RayTracer.ci
 	cito -o $@ $^
