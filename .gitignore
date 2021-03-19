@@ -1,7 +1,9 @@
 *.exe
 *.class
 *.pgm
+js.js
 RayTracer.cpp
 RayTracer.hpp
 RayTracer.cs
+RayTracer.js
 *.java
