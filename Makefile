@@ -1,7 +1,7 @@
 CXXFLAGS = -std=c++2a -O2 -Wall
 
-js.pgm: js.js
-	time node $<
+py.pgm: Main.py RayTracer.py
+	time python $<
 
 cpp.pgm: cpp.exe
 	time ./cpp.exe
@@ -11,6 +11,9 @@ cs.pgm: cs.exe
 
 java.pgm: RayTracer.class Main.class
 	time java Main
+
+js.pgm: js.js
+	time node $<
 
 cpp.exe: RayTracer.cpp Main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -24,5 +27,5 @@ cs.exe: RayTracer.cs Main.cs
 %.class: %.java
 	javac $<
 
-RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.js: RayTracer.ci
+RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.js RayTracer.py: RayTracer.ci
 	cito -o $@ $^
