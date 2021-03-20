@@ -10,6 +10,9 @@ int main(int argc, char **argv)
 	uint8_t pgm[RayTracer::pgmLength];
 	RayTracer::render(pgm, level);
 	FILE *fp = std::fopen("cpp.pgm", "wb");
+	if (fp == NULL)
+		return 1;
 	std::fwrite(pgm, 1, RayTracer::pgmLength, fp);
 	std::fclose(fp);
+	return 0;
 }

@@ -1,7 +1,8 @@
+CFLAGS = -O2 -Wall
 CXXFLAGS = -std=c++2a -O2 -Wall
 
-py.pgm: Main.py RayTracer.py
-	time python $<
+c.pgm: c.exe
+	time ./c.exe
 
 cpp.pgm: cpp.exe
 	time ./cpp.exe
@@ -15,6 +16,12 @@ java.pgm: RayTracer.class Main.class
 js.pgm: js.js
 	time node $<
 
+py.pgm: Main.py RayTracer.py
+	time python $<
+
+c.exe: RayTracer.c Main.c
+	$(CC) $(CFLAGS) -o $@ $^ `pkg-config --cflags --libs glib-2.0`
+
 cpp.exe: RayTracer.cpp Main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
@@ -27,5 +34,5 @@ cs.exe: RayTracer.cs Main.cs
 %.class: %.java
 	javac $<
 
-RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.js RayTracer.py: RayTracer.ci
+RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.js RayTracer.py: RayTracer.ci
 	cito -o $@ $^
