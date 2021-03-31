@@ -3,19 +3,19 @@ class Vec
 	double X;
 	double Y;
 	double Z;
-	internal static Vec# Create(double x, double y, double z)
+	internal static Vec() Create(double x, double y, double z)
 	{
-		Vec# result = new Vec();
+		Vec() result;
 		result.X = x;
 		result.Y = y;
 		result.Z = z;
 		return result;
 	}
-	internal Vec# Add(Vec other) => Create(X + other.X, Y + other.Y, Z + other.Z);
-	internal Vec# Sub(Vec other) => Create(X - other.X, Y - other.Y, Z - other.Z);
-	internal Vec# Scale(double f) => Create(f * X, f * Y, f * Z);
+	internal Vec() Add(Vec other) => Create(X + other.X, Y + other.Y, Z + other.Z);
+	internal Vec() Sub(Vec other) => Create(X - other.X, Y - other.Y, Z - other.Z);
+	internal Vec() Scale(double f) => Create(f * X, f * Y, f * Z);
 	internal double Dot(Vec other) => X * other.X + Y * other.Y + Z * other.Z;
-	internal Vec# Unitise() => Scale(1 / Math.Sqrt(Dot(this)));
+	internal Vec() Unitise() => Scale(1 / Math.Sqrt(Dot(this)));
 }
 
 class Hit
@@ -26,8 +26,8 @@ class Hit
 
 class Ray
 {
-	internal Vec# Orig;
-	internal Vec# Dir;
+	internal Vec() Orig;
+	internal Vec() Dir;
 }
 
 abstract class Scene
@@ -37,10 +37,10 @@ abstract class Scene
 
 class Sphere : Scene
 {
-	internal Vec# Center;
+	internal Vec() Center;
 	double RadiusSquared;
 
-	internal static Sphere# Create(Vec# c, double r)
+	internal static Sphere# Create(Vec() c, double r)
 	{
 		Sphere# result = new Sphere();
 		result.Center = c;
@@ -50,7 +50,7 @@ class Sphere : Scene
 
 	internal double RaySphere(Ray ray)
 	{
-		Vec# v = Center.Sub(ray.Orig);
+		Vec() v = Center.Sub(ray.Orig);
 		double b = v.Dot(ray.Dir);
 		double disc = b * b - v.Dot(v) + RadiusSquared;
 		if (disc < 0)
@@ -101,8 +101,8 @@ public static class RayTracer
 		s.Intersect(hit, ray);
 		if (hit.First == Math.PositiveInfinity)
 			return 0;
-		Vec# point = ray.Orig.Add(ray.Dir.Scale(hit.First));
-		Vec# normal = point.Sub(hit.Target.Center).Unitise();
+		Vec() point = ray.Orig.Add(ray.Dir.Scale(hit.First));
+		Vec() normal = point.Sub(hit.Target.Center).Unitise();
 		double g = normal.Dot(light);
 		if (g >= 0)
 			return 0;
@@ -115,7 +115,7 @@ public static class RayTracer
 		return hit.First < Math.PositiveInfinity ? 0 : -g;
 	}
 
-	static Scene# Create(int level, Vec# c, double r)
+	static Scene# Create(int level, Vec() c, double r)
 	{
 		Scene# s = Sphere.Create(c, r);
 		if (level == 1)
@@ -133,7 +133,7 @@ public static class RayTracer
 	public static void Render(byte[]! pgm, int level = 6)
 	{
 		const int ss = 4;
-		Vec# light = Vec.Create(-1, -3, 2).Unitise();
+		Vec() light = Vec.Create(-1, -3, 2).Unitise();
 		Scene# s = Create(level, Vec.Create(0, -1, 0), 1);
 		Ray() ray;
 		ray.Orig = Vec.Create(0, 0, -4);
