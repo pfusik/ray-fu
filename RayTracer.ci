@@ -38,7 +38,7 @@ abstract class Scene
 class Sphere : Scene
 {
 	internal Vec# Center;
-	internal double Radius;
+	double Radius;
 
 	internal static Sphere# Create(Vec# c, double r)
 	{
