@@ -38,13 +38,13 @@ abstract class Scene
 class Sphere : Scene
 {
 	internal Vec# Center;
-	double Radius;
+	double RadiusSquared;
 
 	internal static Sphere# Create(Vec# c, double r)
 	{
 		Sphere# result = new Sphere();
 		result.Center = c;
-		result.Radius = r;
+		result.RadiusSquared = r * r;
 		return result;
 	}
 
@@ -52,7 +52,7 @@ class Sphere : Scene
 	{
 		Vec# v = Center.Sub(ray.Orig);
 		double b = v.Dot(ray.Dir);
-		double disc = b * b - v.Dot(v) + Radius * Radius;
+		double disc = b * b - v.Dot(v) + RadiusSquared;
 		if (disc < 0)
 			return Math.PositiveInfinity;
 		double d = Math.Sqrt(disc);
