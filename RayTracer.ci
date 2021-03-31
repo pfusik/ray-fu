@@ -21,7 +21,7 @@ class Vec
 class Hit
 {
 	internal double First;
-	internal Vec# Second;
+	internal Sphere Target;
 }
 
 class Ray
@@ -68,7 +68,7 @@ class Sphere : Scene
 		double lambda = RaySphere(ray);
 		if (lambda < hit.First) {
 			hit.First = lambda;
-			hit.Second = ray.Orig.Add(ray.Dir.Scale(lambda)).Sub(Center).Unitise();
+			hit.Target = this;
 		}
 	}
 }
@@ -101,12 +101,14 @@ public static class RayTracer
 		s.Intersect(hit, ray);
 		if (hit.First == Math.PositiveInfinity)
 			return 0;
-		double g = hit.Second.Dot(light);
+		Vec# point = ray.Orig.Add(ray.Dir.Scale(hit.First));
+		Vec# normal = point.Sub(hit.Target.Center).Unitise();
+		double g = normal.Dot(light);
 		if (g >= 0)
 			return 0;
 		const double delta = 1.49012e-08;
 		Ray() ray2;
-		ray2.Orig = ray.Orig.Add(ray.Dir.Scale(hit.First)).Add(hit.Second.Scale(delta));
+		ray2.Orig = point.Add(normal.Scale(delta));
 		ray2.Dir = light.Scale(-1);
 		hit.First = Math.PositiveInfinity;
 		s.Intersect(hit, ray2);
