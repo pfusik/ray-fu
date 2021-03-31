@@ -32,7 +32,7 @@ class Ray
 
 abstract class Scene
 {
-	internal abstract Hit# Intersect(Hit# hit, Ray ray);
+	internal abstract void Intersect(Hit! hit, Ray ray);
 }
 
 class Sphere : Scene
@@ -63,15 +63,13 @@ class Sphere : Scene
 		return t1 > 0 ? t1 : t2;
 	}
 
-	internal override Hit# Intersect(Hit# hit, Ray ray)
+	internal override void Intersect(Hit! hit, Ray ray)
 	{
 		double lambda = RaySphere(ray);
-		if (lambda >= hit.First)
-			return hit;
-		hit = new Hit();
-		hit.First = lambda;
-		hit.Second = ray.Orig.Add(ray.Dir.Scale(lambda)).Sub(Center).Unitise();
-		return hit;
+		if (lambda < hit.First) {
+			hit.First = lambda;
+			hit.Second = ray.Orig.Add(ray.Dir.Scale(lambda)).Sub(Center).Unitise();
+		}
 	}
 }
 
@@ -80,14 +78,13 @@ class Group : Scene
 	internal Sphere# Bound;
 	internal List<Scene#>() Children;
 
-	internal override Hit# Intersect(Hit# hit, Ray ray)
+	internal override void Intersect(Hit! hit, Ray ray)
 	{
 		double l = Bound.RaySphere(ray);
-		if (l >= hit.First)
-			return hit;
-		foreach (Scene# it in Children)
-			hit = it.Intersect(hit, ray);
-		return hit;
+		if (l < hit.First) {
+			foreach (Scene# it in Children)
+				it.Intersect(hit, ray);
+		}
 	}
 }
 
@@ -97,17 +94,11 @@ public static class RayTracer
 	const string PgmHeader = $"P5\n{N} {N}\n255\n";
 	public const int PgmLength = PgmHeader.Length + N * N;
 
-	static Hit# Intersect(Ray ray, Scene s)
-	{
-		Hit# hit = new Hit();
-		hit.First = Math.PositiveInfinity;
-		hit.Second = Vec.Create(0, 0, 0);
-		return s.Intersect(hit, ray);
-	}
-
 	static double RayTrace(Vec light, Ray ray, Scene s)
 	{
-		Hit# hit = Intersect(ray, s);
+		Hit() hit;
+		hit.First = Math.PositiveInfinity;
+		s.Intersect(hit, ray);
 		if (hit.First == Math.PositiveInfinity)
 			return 0;
 		double g = hit.Second.Dot(light);
@@ -117,7 +108,9 @@ public static class RayTracer
 		Ray() ray2;
 		ray2.Orig = ray.Orig.Add(ray.Dir.Scale(hit.First)).Add(hit.Second.Scale(delta));
 		ray2.Dir = light.Scale(-1);
-		return Intersect(ray2, s).First < Math.PositiveInfinity ? 0 : -g;
+		hit.First = Math.PositiveInfinity;
+		s.Intersect(hit, ray2);
+		return hit.First < Math.PositiveInfinity ? 0 : -g;
 	}
 
 	static Scene# Create(int level, Vec# c, double r)
