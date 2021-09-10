@@ -26,8 +26,8 @@ class Hit
 
 class Ray
 {
-	internal Vec() Orig;
-	internal Vec() Dir;
+	internal Vec() Orig = null;
+	internal Vec() Dir = null;
 }
 
 abstract class Scene
@@ -37,7 +37,7 @@ abstract class Scene
 
 class Sphere : Scene
 {
-	internal Vec() Center;
+	internal Vec() Center = null;
 	double RadiusSquared;
 
 	internal static Sphere# Create(Vec() c, double r)
