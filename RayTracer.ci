@@ -137,9 +137,8 @@ public static class RayTracer
 		Scene# s = Create(level, Vec.Create(0, -1, 0), 1);
 		Ray() ray;
 		ray.Orig = Vec.Create(0, 0, -4);
-		int pgmOffset = 0;
-		for (; pgmOffset < PgmHeader.Length; pgmOffset++)
-			pgm[pgmOffset] = PgmHeader[pgmOffset];
+		Encoding.UTF8.GetBytes(PgmHeader, pgm, 0);
+		int pgmOffset = PgmHeader.Length;
 		for (int y = N; --y >= 0; ) {
 			for (int x = 0; x < N; x++) {
 				double g = 0;
