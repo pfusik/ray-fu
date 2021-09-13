@@ -9,5 +9,8 @@ RayTracer.hpp
 RayTracer.cs
 RayTracer.js
 RayTracer.py
+RayTracer.swift
+swift.exp
+swift.lib
 *.java
 __pycache__
