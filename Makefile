@@ -23,7 +23,7 @@ js.pgm: js.js
 	time node $<
 
 py.pgm: Main.py RayTracer.py
-	time python $<
+	time $(PYTHON) $<
 
 swift.pgm: swift.exe
 	time ./swift.exe
