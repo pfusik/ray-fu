@@ -1,9 +1,10 @@
 CFLAGS = -O2 -Wall
 CXXFLAGS = -std=c++2a -O2 -Wall
 CSC = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"
+PYTHON = python -B
 SWIFTC = swiftc
 ifeq ($(OS),Windows_NT)
-SWIFTC += -no-color-diagnostics -sdk '$(SDKROOT)'
+SWIFTC += -no-color-diagnostics -sdk '$(SDKROOT)' -Xlinker -noimplib
 endif
 
 c.pgm: c.exe
