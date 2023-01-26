@@ -19,7 +19,7 @@ cs.pgm: cs.exe
 java.pgm: RayTracer.class Main.class
 	time java Main
 
-js.pgm: js.js
+js.pgm: Main.mjs RayTracer.mjs
 	time node $<
 
 py.pgm: Main.py RayTracer.py
@@ -34,9 +34,6 @@ c.exe: RayTracer.c Main.c
 cpp.exe: RayTracer.cpp Main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-js.js: RayTracer.js Main.js
-	cat $^ > $@
-
 cs.exe: RayTracer.cs Main.cs
 	$(CSC) -nologo -out:$@ $^
 
@@ -46,5 +43,5 @@ cs.exe: RayTracer.cs Main.cs
 swift.exe: RayTracer.swift main.swift
 	$(SWIFTC) -o $@ $^
 
-RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.js RayTracer.py RayTracer.swift: RayTracer.ci
+RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.ci
 	cito -o $@ $^
