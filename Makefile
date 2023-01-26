@@ -1,6 +1,6 @@
 CFLAGS = -O2 -Wall
 CXXFLAGS = -std=c++2a -O2 -Wall
-CSC = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"
+CSC = "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/csc.exe"
 PYTHON = python -B
 SWIFTC = swiftc
 ifeq ($(OS),Windows_NT)
