@@ -21,7 +21,7 @@ class Vec
 class Hit
 {
 	internal double First;
-	internal Sphere Target;
+	internal Sphere? Target;
 }
 
 class Ray
@@ -75,7 +75,7 @@ class Sphere : Scene
 
 class Group : Scene
 {
-	internal Sphere# Bound;
+	internal Sphere#? Bound;
 	internal List<Scene#>() Children;
 
 	internal override void Intersect(Hit! hit, Ray ray)
