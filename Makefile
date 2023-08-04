@@ -4,7 +4,7 @@ CSC = "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/B
 PYTHON = python -B
 SWIFTC = swiftc
 ifeq ($(OS),Windows_NT)
-SWIFTC += -no-color-diagnostics -sdk '$(SDKROOT)' -Xlinker -noimplib
+SWIFTC += -no-color-diagnostics -Xlinker -noexp -Xlinker -noimplib
 endif
 
 c.pgm: c.exe
