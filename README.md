@@ -1,4 +1,4 @@
-﻿Quick port of Jon Harrop's [cut-down ray tracer](https://www.ffconsultancy.com/languages/ray_tracer/index.html)
-to the [Ć programming language](https://github.com/pfusik/cito).
+﻿Quick port of Jon Harrop's [cut-down ray tracer](https://github.com/jdh30/ray)
+to the [Fusion programming language](https://fusion-lang.org).
 
 Work in progress.

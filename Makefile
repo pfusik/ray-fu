@@ -43,5 +43,5 @@ cs.exe: RayTracer.cs Main.cs
 swift.exe: RayTracer.swift main.swift
 	$(SWIFTC) -o $@ $^
 
-RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.ci
-	cito -o $@ $^
+RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.fu
+	fut -o $@ $^

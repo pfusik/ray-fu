@@ -99,7 +99,7 @@ public static class RayTracer
 		Hit() hit;
 		hit.First = Math.PositiveInfinity;
 		s.Intersect(hit, ray);
-		if (hit.First == Math.PositiveInfinity)
+		if (Math.IsInfinity(hit.First))
 			return 0;
 		Vec() point = ray.Orig.Add(ray.Dir.Scale(hit.First));
 		Vec() normal = point.Sub(hit.Target.Center).Unitise();
@@ -112,7 +112,7 @@ public static class RayTracer
 		ray2.Dir = light.Scale(-1);
 		hit.First = Math.PositiveInfinity;
 		s.Intersect(hit, ray2);
-		return hit.First < Math.PositiveInfinity ? 0 : -g;
+		return Math.IsInfinity(hit.First) ? -g : 0;
 	}
 
 	static Scene# Create(int level, Vec() c, double r)
@@ -144,7 +144,7 @@ public static class RayTracer
 				double g = 0;
 				for (int dx = 0; dx < ss; dx++) {
 					for (int dy = 0; dy < ss; dy++) {
-						ray.Dir = Vec.Create(x + dx * 1. / ss - N / 2, y + dy * 1. / ss - N / 2, N).Unitise();
+						ray.Dir = Vec.Create(x + dx * 1.0 / ss - N / 2, y + dy * 1.0 / ss - N / 2, N).Unitise();
 						g += RayTrace(light, ray, s);
 					}
 				}
