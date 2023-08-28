@@ -16,6 +16,9 @@ cpp.pgm: cpp.exe
 cs.pgm: cs.exe
 	time ./cs.exe
 
+d.pgm: d.exe
+	time ./d.exe
+
 java.pgm: RayTracer.class Main.class
 	time java Main
 
@@ -37,11 +40,14 @@ cpp.exe: RayTracer.cpp Main.cpp
 cs.exe: RayTracer.cs Main.cs
 	$(CSC) -nologo -out:$@ $^
 
+d.exe: RayTracer.d Main.d
+	dmd -O -release -of$@ $^
+
 %.class: %.java
 	javac $<
 
 swift.exe: RayTracer.swift main.swift
 	$(SWIFTC) -o $@ $^
 
-RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.fu
+RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.d RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.fu
 	fut -o $@ $^

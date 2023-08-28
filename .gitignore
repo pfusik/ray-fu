@@ -1,5 +1,6 @@
 *.exe
 *.class
+*.obj
 *.pgm
 js.js
 RayTracer.c
@@ -7,6 +8,7 @@ RayTracer.h
 RayTracer.cpp
 RayTracer.hpp
 RayTracer.cs
+RayTracer.d
 RayTracer.mjs
 RayTracer.py
 RayTracer.swift
