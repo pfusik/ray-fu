@@ -1,6 +1,5 @@
 CFLAGS = -O2 -Wall
 CXXFLAGS = -std=c++20 -O2 -Wall
-CSC = "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/csc.exe"
 PYTHON = python -B
 SWIFTC = swiftc
 ifeq ($(OS),Windows_NT)
@@ -13,8 +12,8 @@ c.pgm: c.exe
 cpp.pgm: cpp.exe
 	time ./cpp.exe
 
-cs.pgm: cs.exe
-	time ./cs.exe
+cs.pgm: RayTracer.cs Main.cs
+	time dotnet run -c Release
 
 d.pgm: d.exe
 	time ./d.exe
@@ -36,9 +35,6 @@ c.exe: RayTracer.c Main.c
 
 cpp.exe: RayTracer.cpp Main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
-
-cs.exe: RayTracer.cs Main.cs
-	$(CSC) -nologo -out:$@ $^
 
 d.exe: RayTracer.d Main.d
 	dmd -O -release -of$@ $^

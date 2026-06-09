@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Transpile Include="*.fu" />
+    <Compile Include="*.cs" />
+  </ItemGroup>
+
+  <Target Name="Transpile" BeforeTargets="BeforeCompile" Inputs="@(Transpile)" Outputs="RayTracer.cs">
+    <Exec Command="fut -o RayTracer.cs @(Transpile, ' ')" />
+  </Target>
+
+</Project>

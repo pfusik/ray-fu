@@ -1,8 +1,9 @@
+/bin
+/obj
 *.exe
 *.class
 *.obj
 *.pgm
-js.js
 RayTracer.c
 RayTracer.h
 RayTracer.cpp
