@@ -21,7 +21,7 @@ d.pgm: d.exe
 java.pgm: RayTracer.class Main.class
 	time java Main
 
-js.pgm: Main.mjs RayTracer.mjs
+js.pgm: Main.js RayTracer.js
 	time node $<
 
 py.pgm: Main.py RayTracer.py
@@ -45,5 +45,5 @@ d.exe: RayTracer.d Main.d
 swift.exe: RayTracer.swift main.swift
 	$(SWIFTC) -o $@ $^
 
-RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.d RayTracer.java RayTracer.mjs RayTracer.py RayTracer.swift: RayTracer.fu
+RayTracer.c RayTracer.cpp RayTracer.cs RayTracer.d RayTracer.java RayTracer.js RayTracer.py RayTracer.swift: RayTracer.fu
 	fut -o $@ $^
